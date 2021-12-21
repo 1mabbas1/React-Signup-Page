@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Card from "../UI/Card";
 import styles from "./AddUser.module.css";
 import Button from "../UI/Button";
-import ErrorModal from "../UI/ErrorModel";
+import ErrorModal from "../UI/ErrorModal";
 
 const AddUser = (props) => {
   const [username, setUsername] = new useState("");
   const [email, setEmail] = new useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -17,6 +17,7 @@ const AddUser = (props) => {
         errorTitle: "Invalid Input",
         errorMessage: "Please fill all the fields.",
       });
+      console.log(error);
       return;
     }
     props.onAddUser(username, email);
@@ -37,7 +38,7 @@ const AddUser = (props) => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       {error && (
         <ErrorModal
           onConfirm={errorHandler}
@@ -59,7 +60,7 @@ const AddUser = (props) => {
           <Button type="submit">Submit</Button>
         </form>
       </Card>
-    </div>
+    </React.Fragment>
   );
 };
 
